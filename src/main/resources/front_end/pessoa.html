@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Alunos</title>
+    <link rel="stylesheet" href="pessoa.css">
+</head>
+<body>
+<div class="container">
+    <h1>Cadastro de Alunos</h1>
+    <form id="cadastroForm">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="text" id="curso" placeholder="Curso" required>
+        <input type="number" id="ano" placeholder="Ano" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+    <div id="mensagem"></div>
+</div>
+
+<script src="pessoa.js"></script>
+<div id="contador">Pessoas cadastradas: 0</div>
+
+<img src="Logo.webp" alt="Leão" class="lion-image">
+
+</body>
+</html>

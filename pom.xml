@@ -101,7 +101,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.alunoskesley.ProfessorkesleyApplication</mainClass>
+					<mainClass>com.alunoskesley.professorkesley.ProfessorkesleyApplication</mainClass>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

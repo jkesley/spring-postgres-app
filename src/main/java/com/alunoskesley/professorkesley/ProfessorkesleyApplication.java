@@ -1,4 +1,5 @@
-package com.alunoskesley.professorkesley;
+package com.alunoskesley.professorkesley; // <-- package está em minúsculas e com "professorkesley"
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

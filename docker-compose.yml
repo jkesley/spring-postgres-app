@@ -1,36 +1,31 @@
-version: '3.8'  # Pode remover essa linha se quiser evitar o aviso de obsolescência
-
+version: '3.8'
 services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/meubanco
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-    networks:
-      - app-network
-
-  db:
+  postgres:
     image: postgres:15
+    container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_DB: meubanco
+      POSTGRES_DB: professorkesley
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: 123
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    networks:
-      - app-network
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: professorkesley_app
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/professorkesley
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
 
 volumes:
-  pgdata:
-
-networks:
-  app-network:
+  postgres_data:
 

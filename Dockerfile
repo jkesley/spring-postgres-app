@@ -1,14 +1,24 @@
-# Usar uma imagem base leve do Java 17
-FROM openjdk:17-jdk-slim
-
-# Definir o diretório de trabalho dentro do container
+# Etapa 1 - Build da aplicação
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copiar o arquivo JAR gerado pelo Maven para dentro do container
-COPY target/professorkesley-0.0.1-SNAPSHOT.jar app.jar
+# Copia o pom.xml e baixa dependências
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Expor a porta padrão do Spring Boot
+# Copia o restante do código e compila
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Etapa 2 - Imagem final
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+
+# Copia o .jar da etapa anterior
+COPY --from=build /app/target/*.jar app.jar
+
+# Expõe a porta da aplicação
 EXPOSE 8080
 
-# Comando para rodar a aplicação
+# Comando para rodar
 ENTRYPOINT ["java", "-jar", "app.jar"]
